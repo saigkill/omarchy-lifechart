@@ -11,6 +11,8 @@ Life chart is a tool for self-observation, not a medical device.
 **If you are in crisis, please contact a crisis helpline in your country.**
 Germany: Telefonseelsorge **0800 111 0 111** (free, 24/7)
 
+![Preview](https://github.com/saigkill/omarchy-lifechart/blob/master/preview.png?raw=true)
+
 ## Features
 
 - **Bar widget**: a chart icon whose color reflects today's state:

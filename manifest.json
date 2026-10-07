@@ -1,0 +1,22 @@
+{
+  "schemaVersion": 1,
+  "id": "saigkill.lifechart",
+  "name": "Life chart",
+  "version": "1.0.0",
+  "author": "Sascha Manns",
+  "license": "MIT",
+  "description": "Daily mood and functionality tracker after the NIMH Life Chart method, with chart, PDF report, optional daily reminder and crisis resources",
+  "kinds": [
+    "bar-widget"
+  ],
+  "entryPoints": {
+    "barWidget": "BarWidget.qml"
+  },
+  "barWidget": {
+    "displayName": "Life chart",
+    "description": "Chart icon in the bar, colored when today's entry is missing or critical. Opens a panel for the daily entry (mood, functionality, sleep, notes), a 30/60/90-day chart, a PDF report for any date range and crisis helplines.",
+    "category": "System",
+    "allowMultiple": false,
+    "defaultSection": "right"
+  }
+}

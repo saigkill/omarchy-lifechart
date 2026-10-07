@@ -49,6 +49,11 @@ entries in the running panel to test something. To test with data, point
 `dataDir` in `BarWidget.qml` at a scratch directory with generated data, and
 put it back before you finish (`grep -n 'dataDir:' BarWidget.qml`).
 
+The state directory is `0700` and `data.json` is `0600`: `dirProc` repairs them
+at startup and `permProc` re-applies the mode after every save, because
+`QSaveFile` gives a new file `0666 & ~umask`. Never create an empty
+`data.json` to set its mode; it would be read back as "no entries".
+
 The file lives outside the plugin directory on purpose: Quickshell watches the
 plugin folder and reloads the plugin on any write there. Never move state
 into the plugin directory.

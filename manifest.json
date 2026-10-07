@@ -2,7 +2,7 @@
   "schemaVersion": 1,
   "id": "saigkill.lifechart",
   "name": "Life chart",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "author": "Sascha Manns",
   "license": "MIT",
   "description": "Daily mood and functionality tracker after the NIMH Life Chart method, with chart, PDF report, optional daily reminder and crisis resources",

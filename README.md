@@ -74,7 +74,7 @@ Germany: Telefonseelsorge **0800 111 0 111** (free, 24/7)
 One entry per day. The data lives in `~/.local/state/omarchy-lifechart/data.json`
 (deliberately outside the plugin directory, since writing there makes
 Quickshell reload the plugin). Entries are never trimmed. Writes are atomic,
-and a file that cannot be parsed is never overwritten: the widget turns red
+the directory is private (`0700`) and the file `0600`, and a file that cannot be parsed is never overwritten: the widget turns red
 and stops saving until the file is fixed.
 
 The fields match the app's `DailyEntry`, so an export/import can map them one

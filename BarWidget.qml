@@ -294,6 +294,9 @@ BarWidget {
       }
     }
     onFileChanged: reload()
+    // QSaveFile creates a new file with 0666 & ~umask and only keeps the mode
+    // of an existing one, so a first save is repaired here (see permProc).
+    onSaved: if (!permProc.running) permProc.running = true
     onSaveFailed: function(error) {
       root.saveError = "Saving failed (error " + error + ")."
       console.warn("saigkill.lifechart: failed to save " + root.dataFile + ": " + error)
@@ -316,11 +319,19 @@ BarWidget {
     onFileChanged: reload()
   }
 
+  // This is a mental health record, so the state directory is private (0700)
+  // and so is the history file (0600). Runs at startup to repair an existing
+  // world-readable install, and before the first write to create the directory.
+  // An existing file is only chmodded, never created or touched: an empty
+  // data.json would be read back as "no entries".
   Process {
     id: dirProc
     property bool done: false
     property bool pendingWrite: false
-    command: ["mkdir", "-p", root.dataDir]
+    running: true
+    command: ["sh", "-c",
+      'umask 077 && mkdir -p "$1" && chmod 700 "$1" && { [ ! -e "$2" ] || chmod 600 "$2"; }',
+      "sh", root.dataDir, root.dataFile]
     onExited: function(exitCode) {
       if (exitCode !== 0) {
         root.saveError = "Cannot create " + root.dataDir + "."
@@ -332,6 +343,11 @@ BarWidget {
         root.writeData()
       }
     }
+  }
+
+  Process {
+    id: permProc
+    command: ["chmod", "600", root.dataFile]
   }
 
   Process {
